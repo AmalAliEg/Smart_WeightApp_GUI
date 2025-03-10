@@ -14,6 +14,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -111,7 +112,7 @@ fun Screen1(navController: NavController) {
         topBar = {
             Column {
                 DateTimeBatteryTab()
-                CenterAlignedTopAppBar(title = { Text("Welcome to the Smart Weight-App <3") })
+                CenterAlignedTopAppBar(title = { Text("Welcome to the Smart Weight-App") })
             }
         },
         content = { innerPadding ->
@@ -139,7 +140,7 @@ fun Screen1(navController: NavController) {
 @Composable
 fun Screen2(navController: NavController) {
     var sliderPosition by remember { mutableStateOf(0f) }
-    val texts = listOf("Tomato", "Potato", "Avocado","onion","Apple","Orange","Grallic") // Your texts for the slider
+    val sliderLabels = listOf("Low", "Medium", "High")
 
     Scaffold(
         topBar = {
@@ -149,37 +150,44 @@ fun Screen2(navController: NavController) {
             }
         },
         content = { innerPadding ->
-            Column(
+            Row(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding),
-                horizontalAlignment = Alignment.CenterHorizontally // Center horizontally
+                    .padding(innerPadding)
             ) {
-                Box(
+                // Slider on the left side
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth() // Fill width for alignment
-                        .padding(16.dp) // Add padding around the Box
+                        .fillMaxHeight()
+                        .width(100.dp)
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Column(
-                        modifier = Modifier.align(Alignment.CenterStart) // Align to left-center
-                    ) {
-                        Slider(
-                            value = sliderPosition,
-                            onValueChange = { sliderPosition = it },
-                            valueRange = 0f..7f, // Range corresponding to the number of texts
-                            steps = 1 // Number of steps between texts - 1 less than the number of texts
-                        )
-
-                        Spacer(modifier = Modifier.height(8.dp)) // Space between slider and text
-
-                        Text(text = texts[sliderPosition.toInt()]) // Display the selected text
-                    }
+                    Slider(
+                        value = sliderPosition,
+                        onValueChange = { sliderPosition = it },
+                        valueRange = 0f..2f,
+                        steps = 2,
+                        modifier = Modifier.width(100.dp) // Set the width of the slider
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(text = sliderLabels[sliderPosition.toInt()])
                 }
 
-
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = { navController.popBackStack() }) {
-                    Text("Go Back")
+                // Content on the right side
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text("This is Screen 2", textAlign = TextAlign.Center)
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Button(onClick = { navController.popBackStack() }) {
+                        Text("Go Back")
+                    }
                 }
             }
         }
