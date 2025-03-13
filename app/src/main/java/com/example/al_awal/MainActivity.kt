@@ -1,5 +1,5 @@
 package com.example.al_awal
-
+import com.example.al_awal.ui.navigation.Navigation
 import android.content.Context
 import android.os.BatteryManager
 import android.os.Bundle
@@ -30,14 +30,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : ComponentActivity() {
+    //override the standard/basic OnCreate func of android and apply the OnCreate func related to this app
     override fun onCreate(savedInstanceState: Bundle?) {
+        //call tha main class "ComponentActivity" to be certain that execution is done correctly
         super.onCreate(savedInstanceState)
         setContent {
+            //specific theme for the app, without it, app would use the basic theme for android
             AlawalTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    //start to display and show the GUI
                     Navigation()
                 }
             }
@@ -45,14 +49,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Navigation(navController: NavHostController = rememberNavController()) {
-    NavHost(navController = navController, startDestination = "screen1") {
-        composable("screen1") { Screen1(navController) }
-        composable("screen2") { Screen2(navController) }
-        composable("screen3") { Screen3(navController) }
-    }
-}
+
 
 @Composable
 fun DateTimeBatteryTab() {
@@ -105,122 +102,6 @@ fun getBatteryLevel(context: Context): Int {
     return batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Screen1(navController: NavController) {
-    Scaffold(
-        topBar = {
-            Column {
-                DateTimeBatteryTab()
-                CenterAlignedTopAppBar(title = { Text("Welcome to the Smart Weight-App") })
-            }
-        },
-        content = { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text("This is Screen 1", textAlign = TextAlign.Center)
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = { navController.navigate("screen2") }) {
-                    Text("Automation Mode")
-                }
-                Button(onClick = { navController.navigate("screen3") }) {
-                    Text("Manual Mode")
-                }
-            }
-        }
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Screen2(navController: NavController) {
-    var sliderPosition by remember { mutableStateOf(0f) }
-    val sliderLabels = listOf("Low", "Medium", "High")
-
-    Scaffold(
-        topBar = {
-            Column {
-                DateTimeBatteryTab()
-                CenterAlignedTopAppBar(title = { Text("Automation mode") })
-            }
-        },
-        content = { innerPadding ->
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-            ) {
-                // Slider on the left side
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(100.dp)
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Slider(
-                        value = sliderPosition,
-                        onValueChange = { sliderPosition = it },
-                        valueRange = 0f..2f,
-                        steps = 2,
-                        modifier = Modifier.width(100.dp) // Set the width of the slider
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(text = sliderLabels[sliderPosition.toInt()])
-                }
-
-                // Content on the right side
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text("This is Screen 2", textAlign = TextAlign.Center)
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Button(onClick = { navController.popBackStack() }) {
-                        Text("Go Back")
-                    }
-                }
-            }
-        }
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Screen3(navController: NavController) {
-    Scaffold(
-        topBar = {
-            Column {
-                DateTimeBatteryTab()
-                CenterAlignedTopAppBar(title = { Text("Manual Mode") })
-            }
-        },
-        content = { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text("This is Screen 3", textAlign = TextAlign.Center)
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = { navController.popBackStack() }) {
-                    Text("Go Back")
-                }
-            }
-        }
-    )
-}
 
 @Preview(showBackground = true)
 @Composable
