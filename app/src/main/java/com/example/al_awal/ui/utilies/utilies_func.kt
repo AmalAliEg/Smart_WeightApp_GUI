@@ -69,7 +69,7 @@ fun BatteryIcon(batteryLevel: Int) {
 }
 
 fun getCurrentTime(): String {
-    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault())
     return sdf.format(Date())
 }
 

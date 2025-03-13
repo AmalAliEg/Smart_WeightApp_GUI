@@ -37,7 +37,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
+//this function should navigate between the screens
+//jump to login screen first
 @Composable
 fun Navigation(navController: NavHostController = rememberNavController()) {
     NavHost(navController = navController, startDestination = "Login") {
