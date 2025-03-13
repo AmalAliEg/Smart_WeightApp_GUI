@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.al_awal.DateTimeBatteryTab
+import com.example.al_awal.ui.utilies.DateTimeBatteryTab
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
