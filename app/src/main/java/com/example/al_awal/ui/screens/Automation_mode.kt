@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.al_awal.DateTimeBatteryTab
+import com.example.al_awal.ui.utilies.DateTimeBatteryTab
 import kotlin.collections.listOf
 import kotlin.ranges.rangeTo
 
@@ -32,7 +32,7 @@ import kotlin.ranges.rangeTo
 @Composable
 fun Automation_mode(navController: NavController) {
     var sliderPosition by remember { mutableStateOf(0f) }
-    val sliderLabels = listOf("Low", "Medium", "High")
+    val sliderLabels = listOf("Onions", "Orange", "Apple","Potato")
 
     Scaffold(
         topBar = {
@@ -59,7 +59,7 @@ fun Automation_mode(navController: NavController) {
                     Slider(
                         value = sliderPosition,
                         onValueChange = { sliderPosition = it },
-                        valueRange = 0f..2f,
+                        valueRange = 0f..5f,
                         steps = 2,
                         modifier = Modifier.width(100.dp) // Set the width of the slider
                     )
