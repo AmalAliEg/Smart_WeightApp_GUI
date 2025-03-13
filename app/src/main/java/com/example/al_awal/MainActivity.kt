@@ -1,5 +1,4 @@
 package com.example.al_awal
-import com.example.al_awal.ui.navigation.Navigation
 import android.content.Context
 import android.os.BatteryManager
 import android.os.Bundle
@@ -14,16 +13,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.example.al_awal.ui.navigation.Navigation
 import com.example.al_awal.ui.theme.AlawalTheme
 import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
